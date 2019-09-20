@@ -82,12 +82,14 @@ hist_dR2_eg_jet_fine = ROOT.TH1D("hist_dR2_eg_jet_fine", "hist_dR2_eg_jet_fine",
 hist_dR2dR_mu_jet = ROOT.TH2D("hist_dR2dR_mu_jet", "hist_dR2dR_mu_jet", 20, 0., 10., 20, 0., 100.)
 hist_dR2dR_eg_jet = ROOT.TH2D("hist_dR2dR_eg_jet", "hist_dR2dR_eg_jet", 20, 0., 10., 20, 0., 100.)
 
-hist_dPhi_mu_jet = ROOT.TH1D("hist_dPhi_mu_jet", "hist_dPhi_mu_jet", 70, 0., 3.5)
-hist_dPhi_eg_jet = ROOT.TH1D("hist_dPhi_eg_jet", "hist_dPhi_eg_jet", 70, 0., 3.5)
+hist_dPhi_mu_jet = ROOT.TH1D("hist_dPhi_mu_jet", "hist_dPhi_mu_jet", 70, 0., 3.15)
+hist_dPhi_eg_jet = ROOT.TH1D("hist_dPhi_eg_jet", "hist_dPhi_eg_jet", 70, 0., 3.15)
 hist_dPhi_eg_jet_fine = ROOT.TH1D("hist_dPhi_eg_jet_fine", "hist_dPhi_eg_jet_fine", 10000, 0., 1.)
 hist_dEta_mu_jet = ROOT.TH1D("hist_dEta_mu_jet", "hist_dEta_mu_jet", 100, -7., 7.)
 hist_dEta_eg_jet = ROOT.TH1D("hist_dEta_eg_jet", "hist_dEta_eg_jet", 100, -7., 7.)
 hist_dEta_eg_jet_fine = ROOT.TH1D("hist_dEta_eg_jet_fine", "hist_dEta_eg_jet_fine", 10000, -1., 1.)
+hist_dPhidEta_mu_jet = ROOT.TH2D("hist_dPhidEta_mu_jet", "hist_dPhidEta_mu_jet", 60, -4.,4., 20, 0., 3.15)
+hist_dPhidEta_eg_jet = ROOT.TH2D("hist_dPhidEta_eg_jet", "hist_dPhidEta_eg_jet", 60, -4.,4., 20, 0., 3.15)
 
 hist_mu_pt_all = ROOT.TH1D("mu_pt_all", "mu_pt_all", 200, 0, 100)
 hist_mu_pt_iso = ROOT.TH1D("mu_pt_iso", "mu_pt_iso", 200, 0, 100)
@@ -102,25 +104,31 @@ hist_nEG0      = ROOT.TH1D("nEG0", "nEG0", 20, 0., 20.)
 
 
 tree1 = ROOT.TChain("l1UpgradeTree/L1UpgradeTree")
-for i in range(25,31):
-   print 'i=', i
+#for i in range(25,31):
+#   print 'i=', i
 #  324747_ZeroBias:
 #   tree1.Add("root://eoscms//eos/cms/store/group/dpg_trigger/comm_trigger/L1Trigger/TEAshiftNtuples/ZeroBias2018D-week43-l1t-integration-v101p0-CMSSW-10_2_1/ZeroBias/crab_ZeroBias2018D-week43-l1t-integration-v101p0-CMSSW-10_2_1__324747_ZeroBias_Run2018D-v1/181024_154920/0000/L1Ntuple_{}.root".format(i))
-   tree1.Add("root://eoscms//eos/cms/store/group/dpg_trigger/comm_trigger/L1Trigger/TEAshiftNtuples/NanoDST2018D-week36-l1t-integration-v100p0-CMSSW-10_2_1/L1Accept/crab_NanoDST2018D-week36-l1t-integration-v100p0-CMSSW-10_2_1__322079_L1Accept_Run2018D-v1/180908_191159/0000/L1Ntuple_{}.root".format(i))
+#   tree1.Add("root://eoscms//eos/cms/store/group/dpg_trigger/comm_trigger/L1Trigger/TEAshiftNtuples/NanoDST2018D-week36-l1t-integration-v100p0-CMSSW-10_2_1/L1Accept/crab_NanoDST2018D-week36-l1t-integration-v100p0-CMSSW-10_2_1__322079_L1Accept_Run2018D-v1/180908_191159/0000/L1Ntuple_{}.root".format(i))
+tree1.Add("/afs/cern.ch/work/m/mjeitler/public/WorkingArea/CMSSW_10_2_1/src/L1Ntuple18000.root")
+
 print ' entries in tree1: ', tree1.GetEntries()
 tree2 = ROOT.TChain("l1uGTTree/L1uGTTree")
-for i in range(25,31):
-   print 'i=', i
+#for i in range(25,31):
+#   print 'i=', i
 #  324747_ZeroBias:
 #   tree2.Add("root://eoscms//eos/cms/store/group/dpg_trigger/comm_trigger/L1Trigger/TEAshiftNtuples/ZeroBias2018D-week43-l1t-integration-v101p0-CMSSW-10_2_1/ZeroBias/crab_ZeroBias2018D-week43-l1t-integration-v101p0-CMSSW-10_2_1__324747_ZeroBias_Run2018D-v1/181024_154920/0000/L1Ntuple_{}.root".format(i))
-   tree2.Add("root://eoscms//eos/cms/store/group/dpg_trigger/comm_trigger/L1Trigger/TEAshiftNtuples/NanoDST2018D-week36-l1t-integration-v100p0-CMSSW-10_2_1/L1Accept/crab_NanoDST2018D-week36-l1t-integration-v100p0-CMSSW-10_2_1__322079_L1Accept_Run2018D-v1/180908_191159/0000/L1Ntuple_{}.root".format(i))
+#   tree2.Add("root://eoscms//eos/cms/store/group/dpg_trigger/comm_trigger/L1Trigger/TEAshiftNtuples/NanoDST2018D-week36-l1t-integration-v100p0-CMSSW-10_2_1/L1Accept/crab_NanoDST2018D-week36-l1t-integration-v100p0-CMSSW-10_2_1__322079_L1Accept_Run2018D-v1/180908_191159/0000/L1Ntuple_{}.root".format(i))
+tree2.Add("/afs/cern.ch/work/m/mjeitler/public/WorkingArea/CMSSW_10_2_1/src/L1Ntuple18000.root")
+
 print ' entries in tree2: ', tree2.GetEntries()
 tree3 = ROOT.TChain("l1EventTree/L1EventTree")
-for i in range(25,31):
-   print 'i=', i
+#for i in range(25,31):
+#   print 'i=', i
 #  324747_ZeroBias:
 #   tree3.Add("root://eoscms//eos/cms/store/group/dpg_trigger/comm_trigger/L1Trigger/TEAshiftNtuples/ZeroBias2018D-week43-l1t-integration-v101p0-CMSSW-10_2_1/ZeroBias/crab_ZeroBias2018D-week43-l1t-integration-v101p0-CMSSW-10_2_1__324747_ZeroBias_Run2018D-v1/181024_154920/0000/L1Ntuple_{}.root".format(i))
-   tree3.Add("root://eoscms//eos/cms/store/group/dpg_trigger/comm_trigger/L1Trigger/TEAshiftNtuples/NanoDST2018D-week36-l1t-integration-v100p0-CMSSW-10_2_1/L1Accept/crab_NanoDST2018D-week36-l1t-integration-v100p0-CMSSW-10_2_1__322079_L1Accept_Run2018D-v1/180908_191159/0000/L1Ntuple_{}.root".format(i))
+#   tree3.Add("root://eoscms//eos/cms/store/group/dpg_trigger/comm_trigger/L1Trigger/TEAshiftNtuples/NanoDST2018D-week36-l1t-integration-v100p0-CMSSW-10_2_1/L1Accept/crab_NanoDST2018D-week36-l1t-integration-v100p0-CMSSW-10_2_1__322079_L1Accept_Run2018D-v1/180908_191159/0000/L1Ntuple_{}.root".format(i))
+tree3.Add("/afs/cern.ch/work/m/mjeitler/public/WorkingArea/CMSSW_10_2_1/src/L1Ntuple18000.root")
+
 print ' entries in tree3: ', tree3.GetEntries()
 
 
@@ -195,17 +203,21 @@ for idx, tree1, tree2, tree3 in zip(range(tree1.GetEntries()), tree1, tree2, tre
       continue
     imucnt +=1
     ijetcnt=0        
-    for jj in range (0, min(1, tree1.L1Upgrade.nJets)):
+#    for jj in range (0, min(1, tree1.L1Upgrade.nJets)):
+    for jj in range (0, tree1.L1Upgrade.nJets):
       if (tree1.L1Upgrade.jetBx[jj] != 0):
         continue
       if (tree1.L1Upgrade.jetEt[jj] < 20.):
         continue
-#      print  'jet no:', jj, ' jet Et =', tree1.L1Upgrade.jetEt[jj]	
+#      print  'jet no:', jj, ' jet Et =', tree1.L1Upgrade.jetEt[jj]
+      if (ijetcnt > 0):
+      	break	
       ijetcnt +=1
       dPhi = deltaPhi(tree1.L1Upgrade.muonPhi[ii], tree1.L1Upgrade.jetPhi[jj])
       dEta = tree1.L1Upgrade.muonEta[ii] - tree1.L1Upgrade.jetEta[jj]
       hist_dPhi_mu_jet.Fill(dPhi)
       hist_dEta_mu_jet.Fill(dEta)
+      hist_dPhidEta_mu_jet.Fill(dEta, dPhi)
 #      dR2 =  (tree1.L1Upgrade.muonPhi[ii] - tree1.L1Upgrade.jetPhi[jj])**2 + \
 #             (tree1.L1Upgrade.muonEta[ii] - tree1.L1Upgrade.jetEta[jj])**2 
       dR2 =  dPhi**2 + dEta**2
@@ -235,14 +247,15 @@ for idx, tree1, tree2, tree3 in zip(range(tree1.GetEntries()), tree1, tree2, tre
       continue
     iegcnt +=1
     ijetcnt=0        
-    for jj in range (0, min(2, tree1.L1Upgrade.nJets)):
+#    for jj in range (0, min(2, tree1.L1Upgrade.nJets)):
+    for jj in range (0, tree1.L1Upgrade.nJets):
       if (tree1.L1Upgrade.jetBx[jj] != 0):
         continue
       if (tree1.L1Upgrade.jetEt[jj] < 20.):
         continue
+      if (ijetcnt > 0):
+      	break		
 
-      ijetcnt +=1
-      
       dPhi = deltaPhi(tree1.L1Upgrade.egPhi[ii], tree1.L1Upgrade.jetPhi[jj])
       dEta = tree1.L1Upgrade.egEta[ii] - tree1.L1Upgrade.jetEta[jj]
       dR2 =  dPhi**2 + dEta**2
@@ -254,20 +267,22 @@ for idx, tree1, tree2, tree3 in zip(range(tree1.GetEntries()), tree1, tree2, tre
 #      if (dR2 < 0.0001):
       if ( (dPhi < 0.1) and (abs(dEta) < 0.1) ):	
         continue
-      
+	
+      ijetcnt +=1      
       dR = math.sqrt(dR2)
 #      print 'dR2=', dR2, ' dR=', dR, ' dPhi=', dPhi, tree1.L1Upgrade.egPhi[ii], tree1.L1Upgrade.jetPhi[jj],\
 #       ' dEta=', dEta, tree1.L1Upgrade.egEta[ii], tree1.L1Upgrade.jetEta[jj]
             
       hist_dPhi_eg_jet.Fill(dPhi)     
-      hist_dEta_eg_jet.Fill(dEta)      
+      hist_dEta_eg_jet.Fill(dEta) 
+      hist_dPhidEta_eg_jet.Fill(dEta, dPhi)     
       hist_dR_eg_jet.Fill(dR)	
       hist_dR2_eg_jet.Fill(dR2)	
       hist_dR2dR_eg_jet.Fill(dR, dR2)	
 	      
       if (dR < 0.3): 
         egjetfound +=1
-      break
+#      break
     hist_nJet0_eg.Fill(ijetcnt)
     hist_eg_pt_all.Fill(tree1.L1Upgrade.egEt[ii])
     if (egjetfound == 0):
